@@ -72,9 +72,10 @@ class FilterViewController: UIViewController {
         ResourceService.getPosts { (books) in
             self.posts = books
         }
+        DispatchQueue.main.async {
         ResourceService.getUsers(completion: { (result) -> () in
             self.makeGetCall(species: result)})
-        
+        }
     }
     
     
@@ -106,6 +107,7 @@ class FilterViewController: UIViewController {
     
     
     func makeGetCall(species: [Example]){
+        DispatchQueue.main.async {
         var specieslbl = [String]()
         for i in species{
             let id = i.id as! Int
@@ -114,10 +116,10 @@ class FilterViewController: UIViewController {
             let email = i.email as! String
             let phone = i.phone as! String
             let website = i.website as! String
-            DispatchQueue.main.async {
+        
             
                
-            self.users.append(Example(id: id, name: name, username: username, email: email,phone: phone, website: website))
+                self.users.append(Example(id: id, name: name, username: username, email: email,phone: phone, website: website))
           
                 self.tableView.reloadData()
           
@@ -257,6 +259,7 @@ extension FilterViewController:  UITableViewDataSource, UITableViewDelegate, Use
            return 49
        }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
         if filtered.count > 0 && !self.updatedString.isEmpty{
             return filtered.count/2
         }else{
