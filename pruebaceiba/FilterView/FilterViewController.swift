@@ -114,9 +114,15 @@ class FilterViewController: UIViewController {
             let email = i.email as! String
             let phone = i.phone as! String
             let website = i.website as! String
+            DispatchQueue.main.async {
+            
+               
             self.users.append(Example(id: id, name: name, username: username, email: email,phone: phone, website: website))
           
                 self.tableView.reloadData()
+          
+                
+            }
         }
         
     }
