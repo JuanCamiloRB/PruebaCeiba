@@ -262,9 +262,13 @@ extension FilterViewController:  UITableViewDataSource, UITableViewDelegate, Use
         }else{
         if filtered.count == 0 && !updatedString.isEmpty{
             return 1
-         }
-        }
+        }else{
+            if filtered.count == 0 && updatedString.isEmpty{
+               return users.count/2
         
+           }
+        }
+        }
         return users.count/2
     }
     
